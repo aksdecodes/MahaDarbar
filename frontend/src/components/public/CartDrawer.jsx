@@ -1,142 +1,163 @@
-import React, { useEffect } from 'react';
-import { X, Trash2, ShoppingBag } from 'lucide-react';
+import React from 'react';
+import { X, Trash2, Plus, Minus, MessageSquare, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
 
 const CartDrawer = () => {
-  const { isCartOpen, setIsCartOpen, cartItems, cartTotal, cartCount, updateQuantity, removeFromCart, clearCart } = useCart();
-
-  // Prevent background scrolling when cart is open
-  useEffect(() => {
-    if (isCartOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => { document.body.style.overflow = 'auto'; };
-  }, [isCartOpen]);
+  const { cartItems, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart, clearCart, subtotal, openWhatsAppCheckout } = useCart();
 
   if (!isCartOpen) return null;
 
   return (
-    <div className="cart-drawer fixed inset-0 z-[2000] flex justify-end">
+    <>
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
-        onClick={() => setIsCartOpen(false)}
-      ></div>
+      <div className="cart-drawer-backdrop" onClick={() => setIsCartOpen(false)} />
 
       {/* Drawer */}
-      <div className="relative w-full max-w-[400px] h-full bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out translate-x-0">
+      <div className="cart-drawer">
         
         {/* Header */}
-        <div className="p-4 border-b flex justify-between items-center bg-gray-50">
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold font-poppins text-gray-900">Your Cart</h2>
-            <span className="bg-[#FF6B00] text-white text-xs font-bold px-2 py-0.5 rounded-full">{cartCount}</span>
+        <div style={{
+          padding: '20px',
+          background: 'var(--darbar-burgundy)',
+          color: '#ffffff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderBottom: '2px solid var(--darbar-gold)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <ShoppingBag size={20} color="#fcd34d" />
+            <h3 style={{ fontSize: '18px', fontWeight: 800, fontFamily: "'Rozha One', Georgia, serif" }}>
+              Your Darbar Order
+            </h3>
           </div>
-          <button 
+          <button
             onClick={() => setIsCartOpen(false)}
-            className="p-2 text-gray-500 hover:text-gray-800 hover:bg-gray-200 rounded-full transition-colors"
+            style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer' }}
           >
-            <X className="w-5 h-5" />
+            <X size={22} />
           </button>
         </div>
 
         {/* Cart Items List */}
-        <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+        <div style={{ flex: 1, overflowY: 'auto', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {cartItems.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-gray-500">
-              <ShoppingBag className="w-16 h-16 text-gray-300 mb-4" />
-              <p className="text-lg font-medium mb-2">Your cart is empty</p>
-              <button 
-                onClick={() => setIsCartOpen(false)}
-                className="text-[#FF6B00] font-medium hover:underline"
-              >
-                Browse our menu
-              </button>
+            <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--darbar-text-muted)' }}>
+              <ShoppingBag size={48} color="var(--darbar-border)" style={{ margin: '0 auto 16px' }} />
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--darbar-burgundy)' }}>
+                Your cart is empty
+              </div>
+              <p style={{ fontSize: '13px', marginTop: '6px' }}>
+                Add your favorite thalis, combos, or curries to place an order.
+              </p>
             </div>
           ) : (
             <>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '8px', borderBottom: '1px solid var(--darbar-border)' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--darbar-burgundy)' }}>
+                  Selected Items ({cartItems.length})
+                </span>
+                <button
+                  onClick={clearCart}
+                  style={{ background: 'none', border: 'none', color: '#dc2626', fontSize: '12px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                >
+                  <Trash2 size={13} /> Clear All
+                </button>
+              </div>
+
               {cartItems.map((item) => (
-                <div key={item._id} className="flex gap-4 p-3 bg-white border rounded-xl shadow-sm">
-                  {/* Veg Indicator */}
-                  <div className="flex-shrink-0 pt-1">
-                    <div className={`w-4 h-4 rounded-sm border flex items-center justify-center ${item.isVeg ? 'border-green-600' : 'border-red-600'}`}>
-                      <div className={`w-2 h-2 rounded-full ${item.isVeg ? 'bg-green-600' : 'bg-red-600'}`}></div>
+                <div
+                  key={item.id}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '12px',
+                    background: '#fdfbf7',
+                    borderRadius: '12px',
+                    border: '1px solid var(--darbar-border)',
+                    gap: '12px'
+                  }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 700, fontSize: '14px', color: 'var(--darbar-burgundy)' }}>
+                      {item.name}
+                    </div>
+                    <div style={{ fontSize: '13px', fontWeight: 800, color: 'var(--darbar-maroon)', marginTop: '2px' }}>
+                      ₹{item.price * item.quantity} <span style={{ fontSize: '11px', fontWeight: 500, color: 'var(--darbar-text-muted)' }}>(₹{item.price} each)</span>
                     </div>
                   </div>
-                  
-                  {/* Info */}
-                  <div className="flex-1">
-                    <h4 className="font-bold text-gray-800 text-sm mb-1">{item.name}</h4>
-                    <div className="font-medium text-[#FF6B00] text-sm mb-2">₹{item.price}</div>
-                    
-                    {/* Controls */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
-                        <button 
-                          onClick={() => {
-                            if (item.quantity > 1) updateQuantity(item._id, item.quantity - 1);
-                            else removeFromCart(item._id);
-                          }}
-                          className="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm font-bold text-gray-600"
-                        >
-                          -
-                        </button>
-                        <span className="w-4 text-center text-sm font-bold">{item.quantity}</span>
-                        <button 
-                          onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                          className="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm font-bold text-gray-600"
-                        >
-                          +
-                        </button>
-                      </div>
-                      
-                      <div className="flex items-center gap-3">
-                        <span className="font-bold text-gray-800">₹{item.price * item.quantity}</span>
-                        <button 
-                          onClick={() => removeFromCart(item._id)}
-                          className="text-red-400 hover:text-red-600 p-1"
-                          title="Remove item"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--darbar-burgundy)', color: 'white', borderRadius: '6px', padding: '3px 8px' }}>
+                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}><Minus size={13} /></button>
+                      <span style={{ fontSize: '13px', fontWeight: 800 }}>{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}><Plus size={13} /></button>
                     </div>
+
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+                    >
+                      <X size={16} />
+                    </button>
                   </div>
                 </div>
               ))}
-              
-              <div className="flex justify-end mt-2">
-                <button 
-                  onClick={clearCart}
-                  className="text-xs text-gray-500 hover:text-red-600 underline"
-                >
-                  Clear Cart
-                </button>
-              </div>
             </>
           )}
         </div>
 
-        {/* Footer */}
+        {/* Footer / Checkout */}
         {cartItems.length > 0 && (
-          <div className="p-4 border-t bg-gray-50 flex flex-col gap-4 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
-            <div className="flex justify-between items-center text-lg">
-              <span className="font-medium text-gray-600">Total Amount</span>
-              <span className="font-bold text-gray-900 text-xl">₹{cartTotal}</span>
+          <div style={{ padding: '20px', background: '#fdfbf7', borderTop: '2px solid var(--darbar-border)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', marginBottom: '8px' }}>
+              <span style={{ color: 'var(--darbar-text-muted)' }}>Item Subtotal</span>
+              <span style={{ fontWeight: 700, color: 'var(--darbar-burgundy)' }}>₹{subtotal}</span>
             </div>
-            <button 
-              disabled
-              className="w-full bg-[#FF6B00] text-white font-bold py-3 rounded-xl shadow-md opacity-80 cursor-not-allowed flex items-center justify-center gap-2"
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px dashed var(--darbar-border)' }}>
+              <span style={{ color: 'var(--darbar-text-muted)' }}>Estimated Delivery</span>
+              <span style={{ fontWeight: 700, color: '#16a34a' }}>FREE (Within 2.5km)</span>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '18px', fontWeight: 800, marginBottom: '20px', color: 'var(--darbar-burgundy)' }}>
+              <span>Total Payable</span>
+              <span>₹{subtotal}</span>
+            </div>
+
+            <button
+              onClick={openWhatsAppCheckout}
+              style={{
+                width: '100%',
+                background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)',
+                color: '#ffffff',
+                border: 'none',
+                padding: '14px',
+                borderRadius: '12px',
+                fontWeight: 800,
+                fontSize: '15px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '10px',
+                boxShadow: '0 4px 15px rgba(22, 163, 74, 0.35)',
+                transition: 'transform 0.2s'
+              }}
             >
-              Proceed to Checkout
-              <span className="text-xs bg-white/20 px-2 py-1 rounded">(Coming Soon)</span>
+              <MessageSquare size={18} />
+              <span>Order via WhatsApp</span>
+              <ArrowRight size={16} />
             </button>
+            <div style={{ textAlign: 'center', fontSize: '11px', color: 'var(--darbar-text-muted)', marginTop: '8px' }}>
+              Direct instant order message sent to Maharashtra Darbar Kitchen
+            </div>
           </div>
         )}
+
       </div>
-    </div>
+    </>
   );
 };
 

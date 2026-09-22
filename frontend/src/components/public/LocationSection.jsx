@@ -1,103 +1,158 @@
 import React from 'react';
-import { MapPin, Phone, Clock, Map } from 'lucide-react';
+import { MapPin, Phone, Clock, Navigation, ExternalLink, Calendar } from 'lucide-react';
 
 const LocationSection = () => {
+  const mapUrl = "https://www.google.com/maps/search/?api=1&query=Taza+Kitchen+Lane+Ameerpet+Hyderabad";
+
   return (
-    <section id="contact" className="location-section py-16 bg-orange-50 scroll-mt-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold font-poppins text-gray-900 mb-2">Visit Us</h2>
-          <p className="text-gray-600">We're centrally located in Ameerpet. Drop by for a meal!</p>
+    <section id="location-section" style={{ padding: '60px 0', background: 'var(--darbar-bg)' }}>
+      <div className="darbar-container">
+        
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <span className="section-tag">VISIT US AT AMEERPET</span>
+          <h2 className="section-heading">Location & Hospitality Hours</h2>
+          <p className="section-subtext" style={{ margin: '0 auto' }}>
+            Serving authentic Maharashtrian cuisine and daily mess meals in the heart of Ameerpet.
+          </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'stretch' }} className="location-grid-responsive">
           
-          {/* Info Side */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+          {/* Left Column: Details Cards */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            
             {/* Address Card */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 flex items-start gap-4">
-              <div className="bg-orange-100 p-3 rounded-full text-[#FF6B00] flex-shrink-0">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-bold text-xl mb-2 text-gray-900">Maharashtra Darbar</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  Taza Kitchen Lane, East Srinivasa Colony,<br />
-                  Ameerpet, Hyderabad, Telangana 500038
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="bg-[#FF6B00] hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                    Get Directions
-                  </a>
-                  <a href="tel:7276826361" className="border border-[#FF6B00] text-[#FF6B00] hover:bg-orange-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                    Call Now
-                  </a>
+            <div style={{ background: '#ffffff', borderRadius: '16px', padding: '24px', border: '1px solid var(--darbar-border)', boxShadow: 'var(--darbar-shadow)' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                <div style={{ width: '42px', height: '42px', background: '#f5efe6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--darbar-burgundy)', flexShrink: 0 }}>
+                  <MapPin size={22} style={{ margin: 'auto' }} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '18px', fontWeight: 800, color: 'var(--darbar-burgundy)', marginBottom: '4px' }}>
+                    Maharashtra Darbar
+                  </h3>
+                  <p style={{ fontSize: '14px', color: 'var(--darbar-text-main)', lineHeight: 1.5, marginBottom: '14px' }}>
+                    Taza Kitchen Lane, East Srinivasa Colony, Ameerpet, Hyderabad, Telangana 500038
+                  </p>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                    <a
+                      href={mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-darbar-primary"
+                      style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '10px' }}
+                    >
+                      <Navigation size={14} /> Get Directions
+                    </a>
+                    <a
+                      href="tel:917276826361"
+                      className="btn-darbar-maroon"
+                      style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '10px' }}
+                    >
+                      <Phone size={14} color="#fcd34d" /> Call Now
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Phone Card */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 flex items-start gap-4">
-              <div className="bg-orange-100 p-3 rounded-full text-[#FF6B00] flex-shrink-0">
-                <Phone className="w-6 h-6" />
+            {/* Contact Numbers Card */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', padding: '24px', border: '1px solid var(--darbar-border)', boxShadow: 'var(--darbar-shadow)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                <Phone size={20} color="var(--darbar-maroon)" />
+                <h4 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--darbar-burgundy)' }}>
+                  Direct Phone Numbers
+                </h4>
               </div>
-              <div>
-                <h3 className="font-bold text-xl mb-2 text-gray-900">Contact Numbers</h3>
-                <p className="text-gray-600 mb-1">For orders, mess enrollment, or queries:</p>
-                <div className="flex flex-col gap-1 mt-2">
-                  <a href="tel:7276826361" className="text-lg font-bold text-[#FF6B00] hover:underline">7276826361</a>
-                  <a href="tel:9021589596" className="text-lg font-bold text-[#FF6B00] hover:underline">9021589596</a>
-                </div>
+              <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', fontSize: '15px', fontWeight: 700, color: 'var(--darbar-maroon)' }}>
+                <a href="tel:917276826361" style={{ color: 'var(--darbar-maroon)', textDecoration: 'none' }}>+91 7276826361</a>
+                <a href="tel:919021589596" style={{ color: 'var(--darbar-maroon)', textDecoration: 'none' }}>+91 9021589596</a>
               </div>
             </div>
 
-            {/* Hours Card */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 flex items-start gap-4">
-              <div className="bg-orange-100 p-3 rounded-full text-[#FF6B00] flex-shrink-0">
-                <Clock className="w-6 h-6" />
+            {/* Hospitality Hours Card */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', padding: '24px', border: '1px solid var(--darbar-border)', boxShadow: 'var(--darbar-shadow)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <Clock size={20} color="var(--darbar-maroon)" />
+                <h4 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--darbar-burgundy)' }}>
+                  Hospitality & Mess Hours
+                </h4>
               </div>
-              <div className="w-full">
-                <h3 className="font-bold text-xl mb-4 text-gray-900">Hospitality Hours</h3>
-                
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                    <span className="font-medium text-gray-700">Lunch</span>
-                    <span className="text-gray-600 text-sm">11:30 AM - 04:00 PM</span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                    <span className="font-medium text-gray-700">Dinner</span>
-                    <span className="text-gray-600 text-sm">07:00 PM - 10:00 PM</span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                    <span className="font-medium text-gray-700">Daily Mess</span>
-                    <span className="text-gray-600 text-sm text-right">12:00 PM - 03:00 PM<br/>07:00 PM - 09:30 PM</span>
-                  </div>
-                  <div className="flex justify-between items-center pt-1">
-                    <span className="font-bold text-[#8B1A1A]">Sunday Special</span>
-                    <span className="font-medium text-[#8B1A1A] text-sm">Pangat Bhojal</span>
-                  </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', fontSize: '13.5px' }}>
+                <div style={{ background: '#fdfbf7', padding: '12px', borderRadius: '10px', border: '1px solid var(--darbar-border)' }}>
+                  <div style={{ fontWeight: 800, color: 'var(--darbar-burgundy)', marginBottom: '2px' }}>🍱 Lunch Feast</div>
+                  <div style={{ color: 'var(--darbar-text-muted)' }}>11:30 AM – 04:00 PM</div>
+                </div>
+                <div style={{ background: '#fdfbf7', padding: '12px', borderRadius: '10px', border: '1px solid var(--darbar-border)' }}>
+                  <div style={{ fontWeight: 800, color: 'var(--darbar-burgundy)', marginBottom: '2px' }}>🌙 Dinner Feast</div>
+                  <div style={{ color: 'var(--darbar-text-muted)' }}>07:00 PM – 10:00 PM</div>
                 </div>
               </div>
+              <div style={{ marginTop: '12px', fontSize: '12.5px', color: 'var(--darbar-amber)', fontWeight: 600 }}>
+                *Daily Mess Hours: 12:00 PM – 03:00 PM & 07:00 PM – 09:30 PM (Open 7 Days a week)*
+              </div>
             </div>
+
           </div>
 
-          {/* Map Side */}
-          <div className="w-full lg:w-1/2 min-h-[400px]">
-            <div className="w-full h-full bg-gray-200 rounded-2xl border-4 border-white shadow-md relative overflow-hidden flex items-center justify-center">
-              {/* This is a placeholder for a real iframe map */}
-              <div className="text-center p-6 bg-white/80 backdrop-blur rounded-xl border border-gray-300">
-                <Map className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <h3 className="font-bold text-gray-800 mb-1">Interactive Map Placeholder</h3>
-                <p className="text-sm text-gray-500 mb-4">Integrate Google Maps iframe here</p>
-                <a href="https://maps.google.com/?q=Maharashtra+Darbar+Ameerpet" target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
-                  View on Google Maps
-                </a>
-              </div>
+          {/* Right Column: Google Maps Embed Frame */}
+          <div style={{
+            background: '#ffffff',
+            borderRadius: '16px',
+            border: '1px solid var(--darbar-border)',
+            boxShadow: 'var(--darbar-shadow)',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative'
+          }}>
+            <div style={{ padding: '16px 20px', background: 'var(--darbar-burgundy)', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <span style={{ fontWeight: 700, fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <MapPin size={16} color="#fcd34d" /> Maharashtra Darbar Location Map
+              </span>
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#f3e5ab', fontSize: '12px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}
+              >
+                <span>Open in Maps</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
+
+            <div style={{ flex: 1, minHeight: '340px', width: '100%', position: 'relative' }}>
+              <iframe
+                title="Maharashtra Darbar Location Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.4716766467385!2d78.4449!3d17.4363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI2JzEwLjciTiA3OMKwMjYnNDEuNiJF!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '340px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <div style={{ padding: '14px 20px', background: '#fdfbf7', borderTop: '1px solid var(--darbar-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <span style={{ fontSize: '12px', color: 'var(--darbar-text-muted)' }}>Landmark: Near Taza Kitchen, Ameerpet</span>
+              <a href={mapUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', fontWeight: 800, color: 'var(--darbar-maroon)', textDecoration: 'none' }}>
+                Get Live Directions &rarr;
+              </a>
             </div>
           </div>
 
         </div>
+
       </div>
+
+      <style>{`
+        @media (max-width: 840px) {
+          .location-grid-responsive {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

@@ -10,6 +10,3 @@ export const authService = {
     return response.data;
   }
 };
-
-export default authService;
-
