@@ -8,8 +8,12 @@ const Header = ({ onMenuClick }) => {
   const location = useLocation();
   
   let pageTitle = 'Dashboard';
-  if (location.pathname.startsWith('/members')) {
+  if (location.pathname.startsWith('/admin/members')) {
     pageTitle = 'Members';
+  } else if (location.pathname.startsWith('/admin/groceries')) {
+    pageTitle = 'Groceries';
+  } else if (location.pathname.startsWith('/admin/announcements')) {
+    pageTitle = 'Announcements';
   }
 
   return (

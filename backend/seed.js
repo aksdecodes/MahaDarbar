@@ -15,9 +15,9 @@ const seedData = async () => {
     console.log('Cleared existing data.');
 
     await Admin.create({
-      name: 'Mess Admin',
-      email: 'admin@maharashtriandarbar.com',
-      password: 'Admin@123',
+      name: 'Sameer Wanjari',
+      email: 'admin@maharashtradarbar.com',
+      password: 'admin@2026',
       role: 'ADMIN'
     });
     

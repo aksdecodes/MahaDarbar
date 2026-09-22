@@ -11,7 +11,8 @@ const groceryRoutes = require('./src/routes/groceries');
 const app = express();
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173'
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true
 }));
 app.use(express.json());
 
@@ -27,6 +28,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/members', memberRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/groceries', groceryRoutes);
+app.use('/api/announcements', require('./src/routes/announcements'));
+app.use('/api/menu', require('./src/routes/menu'));
+app.use('/api/user-auth', require('./src/routes/userAuth'));
 
 app.use(errorHandler);
 
