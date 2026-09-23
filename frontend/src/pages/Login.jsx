@@ -12,8 +12,8 @@ const Login = () => {
   const [memberTab, setMemberTab] = useState('signin'); // 'signin' or 'signup'
 
   // Admin form state
-  const [adminEmail, setAdminEmail] = useState('admin@maharashtriandarbar.com');
-  const [adminPassword, setAdminPassword] = useState('Admin@123');
+  const [adminEmail, setAdminEmail] = useState('admin@maharashtradarbar.com');
+  const [adminPassword, setAdminPassword] = useState('admin@2026');
 
   // Member form state
   const [memberName, setMemberName] = useState('');
