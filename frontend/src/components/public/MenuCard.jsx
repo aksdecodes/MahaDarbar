@@ -36,9 +36,31 @@ const MenuCard = ({ item, layout = 'grid' }) => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <span style={{ fontWeight: 800, fontSize: '15px', color: 'var(--darbar-maroon)' }}>
+          
+          <div>
+            <span style={{
+            fontWeight: 800,
+            fontSize: '15px',
+            color: 'var(--darbar-maroon)'
+            }}>
             ₹{item.price}
-          </span>
+            </span>
+
+            {item.monthlyPrice && (
+             <div style={{
+                marginTop: '6px',
+                paddingTop: '6px',
+                borderTop: '1px solid #ddd',
+                fontSize: '12px',
+                fontWeight: 600,
+                color: '#777'
+             }}>
+                ₹{item.monthlyPrice} / month
+            </div>
+            )}
+        </div>
+            
+
           {qtyInCart > 0 ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--darbar-burgundy)', color: 'white', borderRadius: '6px', padding: '2px 8px' }}>
               <button onClick={() => updateQuantity(item.id, qtyInCart - 1)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}><Minus size={13} /></button>
@@ -114,12 +136,36 @@ const MenuCard = ({ item, layout = 'grid' }) => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '12px', borderTop: '1px solid var(--darbar-border)' }}>
-          <div>
-            <span style={{ fontSize: '11px', color: 'var(--darbar-text-muted)', display: 'block' }}>Price</span>
-            <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--darbar-maroon)' }}>
-              ₹{item.price}
-            </span>
-          </div>
+  <div>
+    <span style={{
+      fontSize: '11px',
+      color: 'var(--darbar-text-muted)',
+      display: 'block'
+    }}>
+      Price
+    </span>
+
+    <span style={{
+      fontSize: '20px',
+      fontWeight: 800,
+      color: 'var(--darbar-maroon)'
+    }}>
+      ₹{item.price}
+    </span>
+
+    {item.monthlyPrice && (
+      <div style={{
+        marginTop: '6px',
+        paddingTop: '6px',
+        borderTop: '1px solid #ddd',
+        fontSize: '12px',
+        fontWeight: 600,
+        color: '#777'
+      }}>
+        ₹{item.monthlyPrice} / month
+      </div>
+    )}
+  </div>
 
           {qtyInCart > 0 ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--darbar-burgundy)', color: 'white', borderRadius: '8px', padding: '6px 12px' }}>

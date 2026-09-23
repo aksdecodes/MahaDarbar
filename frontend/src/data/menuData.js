@@ -12,29 +12,34 @@ export const UNLIMITED_THALIS = [
   {
     id: 'thali-1',
     name: 'Unlimited Veg Thali',
-    price: 129,
+    price: 99,
+    
     category: 'unlimited-thali',
     isVeg: true,
     tag: 'Popular',
-    description: 'Puran Poli, Dal Fry, Veg Curry, Dry Veg, Rice, Roti, Curd, Papad, Salad & Sweet.',
+    monthlyPrice: 2800,
+    description: 'Dal Fry, Veg Curry, Dry Veg curry, White Rice, Roti, Raita, Papad, Salad.',
     features: ['Pure Veg', 'Top Seller', 'Unlimited Refills'],
     image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80'
+
   },
   {
     id: 'thali-2',
     name: 'Deluxe Unlimited Thali',
-    price: 179,
+    price: 135,
+    monthlyPrice: 3200,
     category: 'unlimited-thali',
     isVeg: true,
     tag: 'Bestseller',
-    description: 'Sweet Dessert, Paneer Curry, Special Dry Veg, Veg Curry, Dal Fry, Curd, Papad, Rice & Roti.',
+    description: 'Sweet Dessert, Paneer Butter Masala, Special Dry Veg, Pulav Rice, Dal Fry, Curd, Raita, Papad, Rice & Roti.',
     features: ['Paneer Special', 'Unlimited', 'Royal Feast'],
     image: 'https://images.unsplash.com/photo-1613292443284-8d10ef9383fe?w=600&auto=format&fit=crop&q=80'
   },
   {
     id: 'thali-3',
     name: 'Simple Mini Unlimited Thali',
-    price: 99,
+    price: 60,
+    monthlyPrice: 2300,
     category: 'unlimited-thali',
     isVeg: true,
     tag: 'Student Favorite',
@@ -47,17 +52,17 @@ export const UNLIMITED_THALIS = [
 export const TRADITIONAL_THALIS = [
   {
     id: 'trad-1',
-    name: 'Dal Roti Thali',
-    price: 79,
+    name: 'Dal Batti Thali',
+    price: 99,
     category: 'traditional-thali',
     isVeg: true,
     badge: 'Home Special Daily',
-    description: 'Includes 4 Phulkas, Dal Fry, Special Dry Sabzi, Salad & Chutney.'
+    description: 'Includes 4 big Batti, Dal Fry, Special Dry Sabzi, Salad & Chutney.'
   },
   {
     id: 'trad-2',
     name: 'Dal Khichdi Thali',
-    price: 119,
+    price: 89,
     category: 'traditional-thali',
     isVeg: true,
     badge: 'Light & Delicious',
@@ -75,7 +80,7 @@ export const TRADITIONAL_THALIS = [
   {
     id: 'trad-4',
     name: 'Chicken Curry + Rice + Roti Thali',
-    price: 140,
+    price: 160,
     category: 'traditional-thali',
     isVeg: false,
     badge: 'Sunday Speciality',
@@ -84,7 +89,7 @@ export const TRADITIONAL_THALIS = [
   {
     id: 'trad-5',
     name: 'Mutton Curry + Rice + Roti Thali',
-    price: 180,
+    price: 320,
     category: 'traditional-thali',
     isVeg: false,
     badge: 'Sunday Speciality',
@@ -104,7 +109,7 @@ export const TRADITIONAL_THALIS = [
 export const SPECIAL_COMBOS = [
   {
     id: 'combo-1',
-    name: 'Paneer Pulav + Raita + Combo',
+    name: 'Paneer Pulav + Raita + Campa',
     price: 99,
     category: 'special-combos',
     isVeg: true,
@@ -122,8 +127,8 @@ export const SPECIAL_COMBOS = [
   },
   {
     id: 'combo-3',
-    name: 'Godwa Paneer + Butter Roti',
-    price: 219,
+    name: 'Kadhai Paneer + Butter Roti',
+    price: 299,
     category: 'special-combos',
     isVeg: true,
     badge: 'Party Feast',
@@ -131,8 +136,8 @@ export const SPECIAL_COMBOS = [
   },
   {
     id: 'combo-4',
-    name: 'Chicken Pulav + Combo',
-    price: 140,
+    name: 'Chicken Pulav + Campa',
+    price: 99,
     category: 'special-combos',
     isVeg: false,
     badge: 'Non-Veg Special',

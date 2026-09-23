@@ -4,7 +4,7 @@ import { Star, Quote } from 'lucide-react';
 
 const ReviewsSection = () => {
   return (
-    <section id="reviews-section" style={{ padding: '60px 0', background: '#ffffff' }}>
+    <section id="reviews-section" style={{ padding: '60px 0', background: '#ffffff', scrollMarginTop: '130px' }}>
       <div className="darbar-container">
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>

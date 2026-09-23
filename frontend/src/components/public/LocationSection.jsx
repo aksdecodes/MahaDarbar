@@ -5,7 +5,7 @@ const LocationSection = () => {
   const mapUrl = "https://www.google.com/maps/search/?api=1&query=Taza+Kitchen+Lane+Ameerpet+Hyderabad";
 
   return (
-    <section id="location-section" style={{ padding: '60px 0', background: 'var(--darbar-bg)' }}>
+    <section id="location-section" style={{ padding: '60px 0', background: 'var(--darbar-bg)', scrollMarginTop: '130px' }}>
       <div className="darbar-container">
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>

@@ -8,7 +8,7 @@ const MessSection = () => {
   };
 
   return (
-    <section id="mess-section" style={{ padding: '60px 0', background: '#ffffff' }}>
+    <section id="mess-section" style={{ padding: '60px 0', background: '#ffffff', scrollMarginTop: '130px' }}>
       <div className="darbar-container">
         
         <div className="mess-banner-box">
@@ -48,10 +48,10 @@ const MessSection = () => {
                 
                 <div className="mess-stat-pill">
                   <div style={{ fontSize: '22px', fontWeight: 800, color: '#fcd34d', marginBottom: '4px' }}>
-                    ₹60 / meal
+                    ₹2,300 / mo
                   </div>
                   <div style={{ fontSize: '12px', fontWeight: 700, color: '#ffffff' }}>
-                    Student Mess Pack
+                    Regular Pack
                   </div>
                   <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.7)', marginTop: '2px' }}>
                     Homely Daily Tasty Meal
@@ -63,22 +63,22 @@ const MessSection = () => {
                     ₹2,800 / mo
                   </div>
                   <div style={{ fontSize: '12px', fontWeight: 700, color: '#ffffff' }}>
-                    Ladies Kitchen Plus
+                    Special Pack
                   </div>
                   <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.7)', marginTop: '2px' }}>
-                    Monthly Unlimited Meal
+                    Pure Delight
                   </div>
                 </div>
 
                 <div className="mess-stat-pill">
                   <div style={{ fontSize: '22px', fontWeight: 800, color: '#4ade80', marginBottom: '4px' }}>
-                    Free Doorstep
+                    ₹3,200 / mo
                   </div>
                   <div style={{ fontSize: '12px', fontWeight: 700, color: '#ffffff' }}>
-                    Subscription Delivery
+                    Premium Pack
                   </div>
                   <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.7)', marginTop: '2px' }}>
-                    Within 2.5 km of Ameerpet
+                    Total Satisfaction
                   </div>
                 </div>
 
@@ -93,6 +93,9 @@ const MessSection = () => {
                 </span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                   <CheckCircle2 size={16} color="#4ade80" /> Breakfast, Lunch & Dinner
+                </span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  <CheckCircle2 size={16} color="#4ade80" /> Parcels Available
                 </span>
               </div>
             </div>

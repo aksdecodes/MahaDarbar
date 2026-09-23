@@ -7,6 +7,20 @@ const Header = ({ activeCategory, onSelectCategory }) => {
   const navigate = useNavigate();
   const { totalItemCount, setIsCartOpen, pureVegOnly, setPureVegOnly, searchQuery, setSearchQuery } = useCart();
 
+  const handleScrollTo = (id) => {
+    if (onSelectCategory) onSelectCategory(id);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   return (
     <header className="darbar-header-container" style={{ position: 'sticky', top: 0, zIndex: 100 }}>
       {/* Top Announcement Bar / Top Header */}
@@ -172,66 +186,57 @@ const Header = ({ activeCategory, onSelectCategory }) => {
       <div className="darbar-category-bar" style={{ padding: '8px 0', overflowX: 'auto' }}>
         <div className="darbar-container" style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
           <button
-            onClick={() => onSelectCategory && onSelectCategory('all')}
-            className={`category-pill ${activeCategory === 'all' ? 'active' : ''}`}
+            onClick={() => handleScrollTo('menu-preview-section')}
+            className={`category-pill ${activeCategory === 'all' || activeCategory === 'menu-preview-section' ? 'active' : ''}`}
           >
             <Sparkles size={13} style={{ display: 'inline', marginRight: '5px' }} />
             All Dishes
           </button>
           <button
-            onClick={() => onSelectCategory && onSelectCategory('unlimited-thali')}
-            className={`category-pill ${activeCategory === 'unlimited-thali' ? 'active' : ''}`}
+            onClick={() => handleScrollTo('unlimited-thalis')}
+            className={`category-pill ${activeCategory === 'unlimited-thali' || activeCategory === 'unlimited-thalis' ? 'active' : ''}`}
           >
             Unlimited Thalis
           </button>
           <button
-            onClick={() => onSelectCategory && onSelectCategory('traditional-thali')}
-            className={`category-pill ${activeCategory === 'traditional-thali' ? 'active' : ''}`}
+            onClick={() => handleScrollTo('traditional-thalis')}
+            className={`category-pill ${activeCategory === 'traditional-thali' || activeCategory === 'traditional-thalis' ? 'active' : ''}`}
           >
             Traditional Thalis
           </button>
           <button
-            onClick={() => onSelectCategory && onSelectCategory('special-combos')}
+            onClick={() => handleScrollTo('special-combos')}
             className={`category-pill ${activeCategory === 'special-combos' ? 'active' : ''}`}
           >
             Special Combos
           </button>
           <button
-            onClick={() => onSelectCategory && onSelectCategory('curries-paneer')}
-            className={`category-pill ${activeCategory === 'curries-paneer' ? 'active' : ''}`}
+            onClick={() => handleScrollTo('curries-paneer-staples')}
+            className={`category-pill ${activeCategory === 'curries-paneer' || activeCategory === 'curries-paneer-staples' ? 'active' : ''}`}
           >
             Curries, Paneer & Staples
           </button>
           <button
-            onClick={() => onSelectCategory && onSelectCategory('non-veg')}
-            className={`category-pill ${activeCategory === 'non-veg' ? 'active' : ''}`}
+            onClick={() => handleScrollTo('non-veg-specials')}
+            className={`category-pill ${activeCategory === 'non-veg' || activeCategory === 'non-veg-specials' ? 'active' : ''}`}
           >
             Non-Veg Specials
           </button>
           <button
-            onClick={() => {
-              const el = document.getElementById('mess-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="category-pill"
+            onClick={() => handleScrollTo('mess-section')}
+            className={`category-pill ${activeCategory === 'mess-section' ? 'active' : ''}`}
           >
             Mess & Tiffin
           </button>
           <button
-            onClick={() => {
-              const el = document.getElementById('reviews-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="category-pill"
+            onClick={() => handleScrollTo('reviews-section')}
+            className={`category-pill ${activeCategory === 'reviews-section' ? 'active' : ''}`}
           >
             Reviews
           </button>
           <button
-            onClick={() => {
-              const el = document.getElementById('location-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="category-pill"
+            onClick={() => handleScrollTo('location-section')}
+            className={`category-pill ${activeCategory === 'location-section' ? 'active' : ''}`}
           >
             Location
           </button>
