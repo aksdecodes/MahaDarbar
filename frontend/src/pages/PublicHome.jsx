@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../components/public/Hero';
 import AnnouncementBar from '../components/public/AnnouncementBar';
+import PublicAttendanceQRSection from '../components/public/PublicAttendanceQRSection';
 import MenuSection from '../components/public/MenuSection';
 import MessSection from '../components/public/MessSection';
 import AuthenticMenuCards from '../components/public/AuthenticMenuCards';
@@ -12,6 +13,7 @@ const PublicHome = () => {
     <div>
       <Hero />
       <AnnouncementBar />
+      <PublicAttendanceQRSection />
       <MenuSection />
       <MessSection />
       <AuthenticMenuCards />

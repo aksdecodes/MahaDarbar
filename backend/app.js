@@ -31,6 +31,7 @@ app.use('/api/groceries', groceryRoutes);
 app.use('/api/announcements', require('./src/routes/announcements'));
 app.use('/api/menu', require('./src/routes/menu'));
 app.use('/api/user-auth', require('./src/routes/userAuth'));
+app.use('/api/attendance', require('./src/routes/attendance'));
 
 app.use(errorHandler);
 

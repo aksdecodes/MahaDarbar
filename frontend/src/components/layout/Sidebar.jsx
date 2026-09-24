@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, ShoppingCart, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, ShoppingCart, QrCode, LogOut } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -10,6 +10,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/members', label: 'Members', icon: Users },
+    { path: '/attendance', label: 'Attendance', icon: QrCode },
     { path: '/groceries', label: 'Groceries', icon: ShoppingCart }
   ];
 
