@@ -254,16 +254,29 @@ exports.scanAttendance = async (req, res, next) => {
 
     // 5. Check Duplicate Attendance
     const existingAttendance = await Attendance.findOne({
-      member: member._id,
+      $or: [
+        { member: member._id },
+        { memberId: member.memberId }
+      ],
       date: session.date,
       mealType: session.mealType
     });
 
     if (existingAttendance) {
+      const markedTime = formatTime12Hour(existingAttendance.markedAt);
       return res.status(400).json({
         success: false,
         code: 'ALREADY_MARKED',
-        message: `Your ${mealName} attendance has already been recorded today.`
+        message: `Your ${mealName} attendance was already marked at ${markedTime}.`,
+        markedAt: existingAttendance.markedAt,
+        markedAtFormatted: markedTime,
+        data: {
+          id: existingAttendance._id,
+          mealType: existingAttendance.mealType,
+          date: existingAttendance.date,
+          markedAt: existingAttendance.markedAt,
+          markedAtFormatted: markedTime
+        }
       });
     }
 
@@ -284,25 +297,44 @@ exports.scanAttendance = async (req, res, next) => {
       });
     } catch (dbErr) {
       if (dbErr.code === 11000) {
+        const existing = await Attendance.findOne({
+          $or: [
+            { member: member._id },
+            { memberId: member.memberId }
+          ],
+          date: session.date,
+          mealType: session.mealType
+        });
+        const markedTime = existing?.markedAt ? formatTime12Hour(existing.markedAt) : formatTime12Hour(new Date());
         return res.status(400).json({
           success: false,
           code: 'ALREADY_MARKED',
-          message: `Your ${mealName} attendance has already been recorded today.`
+          message: `Your ${mealName} attendance was already marked at ${markedTime}.`,
+          markedAt: existing?.markedAt,
+          markedAtFormatted: markedTime,
+          data: {
+            id: existing?._id,
+            mealType: session.mealType,
+            date: session.date,
+            markedAt: existing?.markedAt,
+            markedAtFormatted: markedTime
+          }
         });
       }
       throw dbErr;
     }
 
+    const markedTime = formatTime12Hour(attendanceRecord.markedAt);
     res.status(200).json({
       success: true,
       code: 'ELIGIBLE',
-      message: `Your ${mealName} attendance has been successfully marked.`,
+      message: `Your ${mealName} attendance has been successfully marked at ${markedTime}.`,
       data: {
         id: attendanceRecord._id,
         mealType: attendanceRecord.mealType,
         date: attendanceRecord.date,
         markedAt: attendanceRecord.markedAt,
-        markedAtFormatted: formatTime12Hour(attendanceRecord.markedAt)
+        markedAtFormatted: markedTime
       }
     });
 

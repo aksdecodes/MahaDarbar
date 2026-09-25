@@ -37,15 +37,21 @@ const AttendanceVerify = () => {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
 
+  const API_BASE = import.meta.env.VITE_API_URL || '/api';
+
   // 1. Fetch and validate session token
   useEffect(() => {
     const fetchSession = async () => {
       setLoadingSession(true);
       setSessionError('');
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/attendance/verify-session/${token}`);
+        const res = await axios.get(`${API_BASE}/attendance/verify-session/${token}`);
         if (res.data?.success) {
           setSessionInfo(res.data.data);
+          const tok = localStorage.getItem('memberToken');
+          if (tok) {
+            markAttendance(tok);
+          }
         } else {
           setSessionError(res.data?.message || 'Invalid QR code');
         }
@@ -61,14 +67,15 @@ const AttendanceVerify = () => {
   // 2. Member sign-in inline
   const handleMemberLogin = async (e) => {
     e.preventDefault();
-    if (!mobile || !password) {
+    const cleanMobile = mobile.trim();
+    if (!cleanMobile || !password) {
       setLoginError('Please enter your mobile number and password');
       return;
     }
     setLoginError('');
     setLoginLoading(true);
     try {
-      const res = await axios.post('/api/user-auth/login', { mobile, password });
+      const res = await axios.post(`${API_BASE}/user-auth/login`, { mobile: cleanMobile, password });
       if (res.data?.token) {
         localStorage.setItem('memberToken', res.data.token);
         localStorage.setItem('memberUser', JSON.stringify(res.data.user));
@@ -91,7 +98,7 @@ const AttendanceVerify = () => {
     setResult(null);
     try {
       const res = await axios.post(
-        '/api/attendance/scan',
+        `${API_BASE}/attendance/scan`,
         { token },
         { headers: { Authorization: `Bearer ${tok}` } }
       );
@@ -105,6 +112,7 @@ const AttendanceVerify = () => {
       const errData = err.response?.data || {};
       const code = errData.code || 'ERROR';
       const message = errData.message || 'Verification failed. Please try again.';
+      const markedTime = errData.markedAtFormatted || errData.data?.markedAtFormatted || '';
 
       if (code === 'UNAUTHORIZED') {
         // Token expired or invalid — clear and show login form
@@ -114,7 +122,12 @@ const AttendanceVerify = () => {
         setMemberUser(null);
         setLoginError('Your session has expired. Please sign in again.');
       } else if (code === 'ALREADY_MARKED') {
-        setResult({ status: 'ALREADY_MARKED', code, message });
+        setResult({
+          status: 'ALREADY_MARKED',
+          code,
+          message,
+          markedAtFormatted: markedTime
+        });
       } else if (code === 'NOT_ELIGIBLE') {
         setResult({ status: 'NOT_ELIGIBLE', code, message });
       } else {
@@ -330,9 +343,21 @@ const AttendanceVerify = () => {
                       <div style={{ fontSize: '22px', fontWeight: 900, color: '#ca8a04', marginBottom: '8px' }}>
                         🟠 ALREADY MARKED
                       </div>
-                      <p style={{ fontSize: '14px', color: '#92400e', fontWeight: 600, marginBottom: '20px' }}>
+                      <p style={{ fontSize: '14px', color: '#92400e', fontWeight: 600, marginBottom: '12px' }}>
                         {result.message}
                       </p>
+
+                      <div style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '6px',
+                        background: '#fefce8', border: '1px solid #fef08a',
+                        borderRadius: '10px', padding: '8px 16px', marginBottom: '20px'
+                      }}>
+                        <span style={{ fontSize: '13px', color: '#854d0e', fontWeight: 700 }}>
+                          📅 {sessionInfo.formattedDate}
+                          {result.markedAtFormatted ? ` · ⏰ Marked at ${result.markedAtFormatted}` : ''}
+                        </span>
+                      </div>
+
                       <Link to="/" style={{
                         display: 'block', textDecoration: 'none',
                         padding: '12px', background: 'var(--darbar-burgundy)',

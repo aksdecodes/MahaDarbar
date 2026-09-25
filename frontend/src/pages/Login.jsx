@@ -62,10 +62,13 @@ const Login = () => {
 
     setLoading(true);
     try {
+      const API_BASE = import.meta.env.VITE_API_URL || '/api';
+      const cleanPhone = memberPhone.trim();
+
       if (memberTab === 'signin') {
         // SIGN IN
-       const res = await axios.post(`${import.meta.env.VITE_API_URL}/user-auth/login`, {
-          mobile: memberPhone,
+        const res = await axios.post(`${API_BASE}/user-auth/login`, {
+          mobile: cleanPhone,
           password: memberPassword
         });
 
@@ -79,8 +82,8 @@ const Login = () => {
         }
       } else {
         // SIGN UP — backend auto-fills name from Member record
-        const res = await axios.post('/api/user-auth/register', {
-          mobile: memberPhone,
+        const res = await axios.post(`${API_BASE}/user-auth/register`, {
+          mobile: cleanPhone,
           password: memberPassword
         });
 

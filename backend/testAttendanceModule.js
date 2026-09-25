@@ -24,7 +24,7 @@ const createMockRes = () => {
       this.statusCode = code;
       return this;
     },
-    son(data) {\
+    json(data) {
       this.body = data;
       return this;
     }
