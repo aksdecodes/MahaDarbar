@@ -43,7 +43,7 @@ const AttendanceVerify = () => {
       setLoadingSession(true);
       setSessionError('');
       try {
-        const res = await axios.get(`/api/attendance/verify-session/${token}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/attendance/verify-session/${token}`);
         if (res.data?.success) {
           setSessionInfo(res.data.data);
         } else {
