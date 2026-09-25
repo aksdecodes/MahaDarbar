@@ -64,7 +64,7 @@ const Login = () => {
     try {
       if (memberTab === 'signin') {
         // SIGN IN
-        const res = await axios.post('/api/user-auth/login', {
+       const res = await axios.post(`${import.meta.env.VITE_API_URL}/user-auth/login`, {
           mobile: memberPhone,
           password: memberPassword
         });
